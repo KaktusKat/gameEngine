@@ -4,3 +4,5 @@ LDFLAGS=-L/opt/homebrew/lib -lsdl3
 
 main: main.cpp
 
+main.cpp: gameEngine.h
+

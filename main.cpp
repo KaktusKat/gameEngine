@@ -3,9 +3,12 @@
 int main()
 {
    Screen screen(500,500);
-   Image  testI("gob.png",18,17);
+   Image  testI("gob.png",50,50);
    bool   stop      = false;
    bool   keys[256] = {};
+   bool   mouseC    = false;
+   unsigned Mx      = 0;
+   unsigned My      = 0;
    float x = 200;
    float y = 200;
 
@@ -22,8 +25,12 @@ int main()
       {
          y -= 0.1;
       }
+      if (mouseC)
+      {
+         x -= 0.1; 
+      }
       
-      eventLoopKeys(keys,sdl_event,&stop);      
+      eventLoop(keys,sdl_event,&mouseC,&Mx,&My,&stop);      
       
       screen.refresh();
    }

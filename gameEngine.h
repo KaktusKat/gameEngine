@@ -44,8 +44,8 @@ public:
       SDL_Rect srcrect;
       srcrect.x = 0;
       srcrect.y = 0;
-      srcrect.w = image->w;
-      srcrect.h = image->h;
+      srcrect.w = image->surface->w;
+      srcrect.h = image->surface->h;
 
       SDL_Rect dstrect;
       dstrect.x = x;
@@ -53,14 +53,17 @@ public:
       dstrect.w = image->w;
       dstrect.h = image->h;
 
-      SDL_BlitSurface(image->surface, &srcrect, surface, &dstrect);
+      SDL_BlitSurfaceScaled(image->surface, &srcrect, surface, &dstrect,SDL_SCALEMODE_NEAREST);
    }
 
    void refresh()
    {
-      SDL_UpdateTexture(texture, nullptr, surface->pixels, surface->pitch);
       SDL_RenderTexture(renderer, texture, nullptr, nullptr);
+      SDL_UpdateTexture(texture, nullptr, surface->pixels, surface->pitch);
       SDL_RenderPresent(renderer);
+      SDL_ClearSurface(surface,0,0,0,0);
+// not sure if needed
+//      SDL_RenderClear(renderer);
    }
 
    
@@ -73,7 +76,7 @@ public:
 
 };
 
-void eventLoopKeys(bool* keys,SDL_Event sdl_event,bool* stop)
+void eventLoop(bool* keys,SDL_Event sdl_event,bool* mouseC,unsigned* x,unsigned* y,bool* stop)
 {
          
    while(SDL_PollEvent(&sdl_event))
@@ -91,6 +94,19 @@ void eventLoopKeys(bool* keys,SDL_Event sdl_event,bool* stop)
             
       case(SDL_EVENT_KEY_UP):
          keys[sdl_event.key.key] = false;
+         break;
+      
+      case(SDL_EVENT_MOUSE_BUTTON_DOWN):
+         *mouseC = true;
+         break;
+
+      case(SDL_EVENT_MOUSE_BUTTON_UP):
+         *mouseC = false;
+         break;
+
+      case(SDL_EVENT_MOUSE_MOTION):
+         *x = sdl_event.motion.x;
+         *y = sdl_event.motion.y;
          break;
       }
    }
