@@ -1,36 +1,60 @@
+#include "Screen.h"
+#include "Animation.h"
+#include "Image.h"
 #include "gameEngine.h"
 
 int main()
 {
+   Image animationL[2];
+   unsigned imageLength[2] = {100,100};
    Screen screen(500,500);
    Image  testI("gob.png",50,50);
    bool   stop      = false;
    bool   keys[256] = {};
-   bool   mouseC    = false;
+   bool   mouseC[3] = {};
+   int    animate   = 0;
    unsigned Mx      = 0;
    unsigned My      = 0;
    float x = 200;
    float y = 200;
 
+   animationL[0].set("gobWalk.png", 50, 50);
+   animationL[1].set("gobWalk2.png", 50, 50);
+   Animation walk(animationL,imageLength,2);
+
    while(not stop)
    {
-      screen.blit(&testI,x,y);
       SDL_Event sdl_event;
 
       if (keys['s'])
       {
          y += 0.1;
+         animate += 1;
       }
       if (keys['w'])
       {
          y -= 0.1;
+         animate -= 1;
       }
-      if (mouseC)
+
+      if(animate != 0)
       {
-         x -= 0.1; 
+         animate = 0;
+         walk.play(&screen,x,y);
+      }
+      else
+      {
+         screen.blit(&testI,x,y);
+      }
+
+      if (mouseC[0])
+      {
+         mouseC[0] = false;
+         x         = Mx;
+         y         = My; 
       }
       
-      eventLoop(keys,sdl_event,&mouseC,&Mx,&My,&stop);      
+      eventLoop(keys, sdl_event, mouseC, &Mx, &My, &stop);      
       
       screen.refresh();
    }
