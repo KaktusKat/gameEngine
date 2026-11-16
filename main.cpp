@@ -1,3 +1,4 @@
+#include "HitBox.h"
 #include "Screen.h"
 #include "Animation.h"
 #include "Image.h"
@@ -13,14 +14,17 @@ int main()
    bool   keys[256] = {};
    bool   mouseC[3] = {};
    int    animate   = 0;
-   unsigned Mx      = 0;
-   unsigned My      = 0;
-   float x = 200;
-   float y = 200;
+   int Mx           = 0;
+   int My           = 0;
+   int x            = 200;
+   int y            = 200;
 
    animationL[0].set("gobWalk.png", 50, 50);
    animationL[1].set("gobWalk2.png", 50, 50);
    Animation walk(animationL,imageLength,2);
+
+   HitBox playerH(&x,&y,50,50,"any");
+   HitBox mouseH(&Mx,&My,1,1,"any");
 
    while(not stop)
    {
@@ -28,13 +32,20 @@ int main()
 
       if (keys['s'])
       {
-         y += 0.1;
+         y += 1;
          animate += 1;
       }
       if (keys['w'])
       {
-         y -= 0.1;
+         y -= 1;
          animate -= 1;
+      }
+
+      if (playerH.isHit(mouseH,"any") and mouseC[2])
+      {
+         mouseC[2] = false;
+         testI.w  -= 1;
+         testI.h  -= 1;
       }
 
       if(animate != 0)

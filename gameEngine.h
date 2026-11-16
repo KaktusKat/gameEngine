@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <SDL3/SDL.h>
 
-void eventLoop(bool* keys, SDL_Event sdl_event, bool* mouseC, unsigned* x, unsigned* y, bool* stop)
+void eventLoop(bool* keys, SDL_Event sdl_event, bool* mouseC, int* x, int* y, bool* stop)
 {
          
    while(SDL_PollEvent(&sdl_event))
