@@ -25,6 +25,12 @@ public:
       }
    }
 
+   void blitR(SDL_Rect* rect,int red = 255,int green = 0,int blue = 0,int alpha = 255)
+   {
+      Uint32 colour = SDL_MapRGB(SDL_GetPixelFormatDetails(surface->format), NULL, red, green, blue);
+      SDL_FillSurfaceRect(surface,rect,colour);
+   }
+
    void blit(Image* image,int x,int y)
    {
       SDL_Rect srcrect;
@@ -52,6 +58,16 @@ public:
 //      SDL_RenderClear(renderer);
    }
 
+   SDL_Rect makeRect(int x, int y, int w, int h)
+   {
+      SDL_Rect drawRect;
+      drawRect.x = x;
+      drawRect.y = y;
+      drawRect.w = w;
+      drawRect.h = h;
+      
+      return drawRect;
+   }
 
    SDL_Window*   window;
    SDL_Renderer* renderer;

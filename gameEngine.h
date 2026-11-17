@@ -37,3 +37,4 @@ void eventLoop(bool* keys, SDL_Event sdl_event, bool* mouseC, int* x, int* y, bo
    }
 }
 
+
