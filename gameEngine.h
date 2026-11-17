@@ -37,4 +37,14 @@ void eventLoop(bool* keys, SDL_Event sdl_event, bool* mouseC, int* x, int* y, bo
    }
 }
 
+SDL_Rect makeRect(int x, int y, int w, int h)
+{
+   SDL_Rect drawRect;
+   drawRect.x = x;
+   drawRect.y = y;
+   drawRect.w = w;
+   drawRect.h = h;
+
+   return drawRect;
+}
 

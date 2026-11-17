@@ -18,7 +18,7 @@ int main()
    int My           = 0;
    int x            = 200;
    int y            = 200;
-   SDL_Rect rect    = screen.makeRect(0,0,500,500);
+   SDL_Rect rect    = makeRect(0,0,500,500);
 
    animationL[0].set("gobWalk.png", 50, 50);
    animationL[1].set("gobWalk2.png", 50, 50);

@@ -58,17 +58,6 @@ public:
 //      SDL_RenderClear(renderer);
    }
 
-   SDL_Rect makeRect(int x, int y, int w, int h)
-   {
-      SDL_Rect drawRect;
-      drawRect.x = x;
-      drawRect.y = y;
-      drawRect.w = w;
-      drawRect.h = h;
-      
-      return drawRect;
-   }
-
    SDL_Window*   window;
    SDL_Renderer* renderer;
    SDL_Surface*  surface;
