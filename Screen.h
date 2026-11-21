@@ -49,8 +49,8 @@ public:
 
    void refresh()
    {
-      SDL_RenderTexture(renderer, texture, nullptr, nullptr);
       SDL_UpdateTexture(texture, nullptr, surface->pixels, surface->pitch);
+      SDL_RenderTexture(renderer, texture, nullptr, nullptr);
       SDL_RenderPresent(renderer);
       SDL_ClearSurface(surface,0,0,0,0);
 // not sure if needed
