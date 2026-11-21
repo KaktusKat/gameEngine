@@ -25,10 +25,9 @@ public:
       }
    }
 
-   void blitR(SDL_Rect* rect,int red = 255,int green = 0,int blue = 0,int alpha = 255)
+   void blitR(SDL_Rect* rect,uint32_t col)
    {
-      Uint32 colour = SDL_MapRGB(SDL_GetPixelFormatDetails(surface->format), NULL, red, green, blue);
-      SDL_FillSurfaceRect(surface,rect,colour);
+      SDL_FillSurfaceRect(surface,rect,col);
    }
 
    void blit(Image* image,int x,int y)

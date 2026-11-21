@@ -29,7 +29,7 @@ int main()
 
    while(not stop)
    {
-      screen.blitR(&rect);
+      screen.blitR(&rect,0xFF0000FF);
 
       SDL_Event sdl_event;
 
